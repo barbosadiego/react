@@ -1,13 +1,12 @@
 import React from 'react'
+import UserContext from './UserContext'
 
-const Produto = ({dados}) => {
+const Produto = (props) => {
+  const dados = React.useContext(UserContext)
+  console.log(dados)
   return (
     <div>
-       <div>
-          <h1>{dados.nome}</h1>
-          <p>R$: {dados.preco}</p>
-          <img src={dados.fotos[0].src} alt={dados.nome} />
-        </div>
+      {dados.nome}
     </div>
   )
 }
