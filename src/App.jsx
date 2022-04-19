@@ -2,21 +2,14 @@ import React from 'react';
 
 const App = (props) => {
   const [contar, setContar] = React.useState(0);
-  const t1 = performance.now();
-  const valor = React.useMemo(() => operacaoLenta(), []);
-  console.log(performance.now() - t1);
 
-  function operacaoLenta() {
-    let c;
-    for (let i = 0; i < 100000000; i++) {
-      c = i + 1 / 10;
-    }
-    return c;
-  }
+  const handleClick = React.useCallback(() => {
+    setContar((contar) => contar + 1);
+  }, []);
 
   return (
     <div>
-      <button onClick={() => setContar(contar + 1)}>Click {contar}</button>
+      <button onClick={handleClick}>Click {contar}</button>
     </div>
   );
 };
