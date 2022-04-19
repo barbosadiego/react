@@ -1,13 +1,13 @@
-import React from 'react'
-import Produto from './Produto'
-import UserContext from './UserContext'
+import React from 'react';
+import Produto from './Produto';
+import { GlobalStorage } from './GlobalContext';
 
 const App = () => {
   return (
-    <UserContext.Provider value={{nome: 'zé'}}>
+    <GlobalStorage>
       <Produto />
-    </UserContext.Provider>
-  )
-}
+    </GlobalStorage>
+  );
+};
 
-export default App
+export default App;

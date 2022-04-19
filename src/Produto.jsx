@@ -1,14 +1,19 @@
-import React from 'react'
-import UserContext from './UserContext'
+import React from 'react';
+import { GlobalContext } from './GlobalContext';
 
 const Produto = (props) => {
-  const dados = React.useContext(UserContext)
-  console.log(dados)
+  const global = React.useContext(GlobalContext);
+
+  // function handleClick() {
+  //   global.setContar((contar) => contar + 1);
+  // }
+
   return (
     <div>
-      {dados.nome}
+      <p>Produto: {global.contar}</p>
+      <button onClick={() => global.adicionarDois()}>Click</button>
     </div>
-  )
-}
+  );
+};
 
-export default Produto
+export default Produto;
