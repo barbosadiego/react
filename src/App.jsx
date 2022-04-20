@@ -1,17 +1,62 @@
 import React from 'react';
 
 const App = () => {
-  const [form, setForm] = React.useState({
-    nome: '',
-    email: '',
-    senha: '',
-    cep: '',
-    rua: '',
-    numero: '',
-    bairro: '',
-    cidade: '',
-    estado: '',
-  });
+  const fields = [
+    {
+      id: 'nome',
+      label: 'Nome',
+      type: 'text',
+    },
+    {
+      id: 'email',
+      label: 'Email',
+      type: 'email',
+    },
+    {
+      id: 'senha',
+      label: 'Senha',
+      type: 'password',
+    },
+    {
+      id: 'cep',
+      label: 'Cep',
+      type: 'text',
+    },
+    {
+      id: 'rua',
+      label: 'Rua',
+      type: 'text',
+    },
+    {
+      id: 'numero',
+      label: 'Número',
+      type: 'text',
+    },
+    {
+      id: 'bairro',
+      label: 'Bairro',
+      type: 'text',
+    },
+    {
+      id: 'cidade',
+      label: 'Cidade',
+      type: 'text',
+    },
+    {
+      id: 'estado',
+      label: 'Estado',
+      type: 'text',
+    },
+  ];
+
+  const [form, setForm] = React.useState(
+    fields.reduce((acc, item) => {
+      return {
+        ...acc,
+        [item.id]: '',
+      };
+    }, {}),
+  );
 
   const [confirm, setConfirm] = React.useState(null);
 
@@ -25,8 +70,7 @@ const App = () => {
       },
       body: JSON.stringify(form),
     }).then((res) => setConfirm(res));
-    // .then((json) => setConfirm(json));
-    console.log(confirm);
+    // console.log(confirm);
   }
 
   function handleChange({ target }) {
@@ -36,21 +80,16 @@ const App = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {Object.keys(form).map((key) => (
-        <div key={key}>
-          <label htmlFor={key} style={{ textTransform: 'capitalize' }}>
-            {key}
+      {fields.map(({ id, type, label }) => (
+        <div key={id}>
+          <label htmlFor={id} style={{ textTransform: 'capitalize' }}>
+            {label}
           </label>
-          <input
-            id={key}
-            type="text"
-            value={form[key]}
-            onChange={handleChange}
-          />
+          <input id={id} type={type} value={form[id]} onChange={handleChange} />
         </div>
       ))}
       <button>Enviar</button>
-      {confirm && confirm.status === 200 ? 'Usuário cadastrado' : ''}
+      {confirm && confirm.ok ? 'Usuário cadastrado' : ''}
     </form>
   );
 };
