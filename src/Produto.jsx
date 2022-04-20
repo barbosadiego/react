@@ -4,14 +4,26 @@ import { GlobalContext } from './GlobalContext';
 const Produto = (props) => {
   const global = React.useContext(GlobalContext);
 
-  // function handleClick() {
-  //   global.setContar((contar) => contar + 1);
-  // }
+  React.useEffect(() => {
+    fetch('https://ranekapi.origamid.dev/json/api/produto/')
+      .then((res) => res.json())
+      .then((json) => global.setData(json));
+  }, []);
+
+  // console.log(global);
 
   return (
     <div>
-      <p>Produto: {global.contar}</p>
-      <button onClick={() => global.adicionarDois()}>Click</button>
+      <h1>dados:</h1>
+      <ul>
+        {global.data &&
+          global.data.map((item) => (
+            <li key={item.id}>
+              {item.nome} / R$ {item.preco}
+            </li>
+          ))}
+      </ul>
+      {global.data ? <button onClick={global.limparDados}>Limpar dados</button> : null}
     </div>
   );
 };
