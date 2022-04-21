@@ -65,6 +65,11 @@ textarea {
   transition: 0.2s;
 }
 
+input[type='radio']{
+  display: inline;
+  width: unset;
+}
+
 input:focus,
 textarea:focus {
   outline: none;
