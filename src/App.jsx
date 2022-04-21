@@ -47,14 +47,15 @@ const App = () => {
 
   function totalPontos() {
     setMensagem('');
+    setPontos(0);
     radio.forEach((item, index) => {
       if (item === perguntas[index].resposta) {
         setPontos((pontos) => pontos + 1);
       }
     });
-    setMensagem('Você acertou ' + pontos);
+    setMensagem('Você acertou ');
   }
-  console.log(pontos);
+  // console.log(pontos);
   // console.log(radio);
   // console.log(perguntas)
   return (
@@ -69,7 +70,7 @@ const App = () => {
                   type="radio"
                   name="question"
                   value={opt}
-                  // checked={radio === opt}
+                  // checked={opt === item.pergunta}
                   onChange={handleClick}
                 />
                 {opt}
@@ -79,7 +80,7 @@ const App = () => {
         </section>
       ))}
       <button onClick={totalPontos}>Total</button>
-      {mensagem && <p>{mensagem}</p>}
+      {mensagem && <p>{mensagem}{pontos}</p>}
     </>
   );
 };
