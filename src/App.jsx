@@ -1,42 +1,86 @@
 import React from 'react';
-import Input from './Form/Input';
-import useForm from './Hook/useForm';
+import './App.css';
 
-const App = (props) => {
-  const cep = useForm('cep');
-  const email = useForm('email');
-  const nome = useForm();
-  const sobrenome = useForm(false);
+const perguntas = [
+  {
+    pergunta: 'Qual método é utilizado para criar componentes?',
+    options: [
+      'React.makeComponent()',
+      'React.createComponent()',
+      'React.createElement()',
+    ],
+    resposta: 'React.createElement()',
+    id: 'p1',
+  },
+  {
+    pergunta: 'Como importamos um componente externo?',
+    options: [
+      'import Component from "./Component"',
+      'require("./Component")',
+      'import "./Component"',
+    ],
+    resposta: 'import Component from "./Component"',
+    id: 'p2',
+  },
+  {
+    pergunta: 'Qual hook não é nativo?',
+    options: ['useEffect()', 'useFetch()', 'useCallback()'],
+    resposta: 'useFetch()',
+    id: 'p3',
+  },
+  {
+    pergunta: 'Qual palavra deve ser utilizada para criarmos um hook?',
+    options: ['set', 'get', 'use'],
+    resposta: 'use',
+    id: 'p4',
+  },
+];
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    if (cep.validate() && email.validate() && nome.validate()) {
-      console.log('Enviado');
-    } else {
-      console.log('Não enviado');
-    }
+const App = () => {
+  const [radio, setRadio] = React.useState([]);
+  const [pontos, setPontos] = React.useState(0);
+  const [mensagem, setMensagem] = React.useState('');
+
+  function handleClick({ target }) {
+    setRadio([...radio, target.value]);
   }
 
+  function totalPontos() {
+    setMensagem('');
+    radio.forEach((item, index) => {
+      if (item === perguntas[index].resposta) {
+        setPontos((pontos) => pontos + 1);
+      }
+    });
+    setMensagem('Você acertou ' + pontos);
+  }
+  console.log(pontos);
+  // console.log(radio);
+  // console.log(perguntas)
   return (
-    <form onSubmit={handleSubmit}>
-      <Input label="Nome" id="nome" type="text" {...nome} />
-      <Input label="sobrenome" id="sobrenome" type="text" {...sobrenome} />
-      <Input
-        label="CEP"
-        id="cep"
-        type="text"
-        placeholder="00000-000"
-        {...cep}
-      />
-      <Input
-        label="Email"
-        id="email"
-        type="email"
-        placeholder="seuemail@provedor.com"
-        {...email}
-      />
-      <button>Enviar</button>
-    </form>
+    <>
+      {perguntas.map((item) => (
+        <section key={item.id} className="section">
+          <form>
+            <h2>{item.pergunta}</h2>
+            {item.options.map((opt, index) => (
+              <div key={index} className="input">
+                <input
+                  type="radio"
+                  name="question"
+                  value={opt}
+                  // checked={radio === opt}
+                  onChange={handleClick}
+                />
+                {opt}
+              </div>
+            ))}
+          </form>
+        </section>
+      ))}
+      <button onClick={totalPontos}>Total</button>
+      {mensagem && <p>{mensagem}</p>}
+    </>
   );
 };
 
