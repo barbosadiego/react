@@ -65,7 +65,8 @@ textarea {
   transition: 0.2s;
 }
 
-input[type='radio']{
+input[type='radio'],
+input[type='checkbox']{
   display: inline;
   width: unset;
 }
