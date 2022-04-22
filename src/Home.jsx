@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Head from './Head';
 
 const Home = (props) => {
   return (
     <div>
+      <Head title='Página inicial' description='Essa é a descricao'/>
       <h1>Home</h1>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente
