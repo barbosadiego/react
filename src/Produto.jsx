@@ -1,8 +1,5 @@
 import React from 'react';
-import { NavLink, Route, Routes, useLocation, useParams } from 'react-router-dom';
-import ProdutoDescricao from './ProdutoDescricao';
-import ProdutoAvaliação from './ProdutoAvaliação';
-import ProdutoCustomizado from './ProdutoCustomizado';
+import { NavLink, useLocation, useParams, Outlet } from 'react-router-dom';
 
 const Produto = (props) => {
   const parans = useParams();
@@ -13,15 +10,11 @@ const Produto = (props) => {
     <div>
       <h1>Poduto: {parans.id}</h1>
       <nav>
-        <NavLink to=''>Descrição</NavLink> {' '}
-        <NavLink to='avaliacao'>Avaliação</NavLink> {' '}
-        <NavLink to='customizado'>Customizado</NavLink>
+        <NavLink to="">Descrição</NavLink>{' '}
+        <NavLink to="avaliacao">Avaliação</NavLink>{' '}
+        <NavLink to="customizado">Customizado</NavLink>
       </nav>
-      <Routes>
-        <Route path="/" element={<ProdutoDescricao />} />
-        <Route path="/avaliacao" element={<ProdutoAvaliação />} />
-        <Route path='/customizado' element={<ProdutoCustomizado />} />
-      </Routes>
+      <Outlet />
     </div>
   );
 };
