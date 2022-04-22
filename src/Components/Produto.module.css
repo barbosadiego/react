@@ -1,0 +1,22 @@
+:root{
+  --cor: red;
+  --size: 2rem;
+}
+
+.titulo{
+  color: #43c;
+}
+
+.preco{
+  font-weight: bold;
+  font-size: var(--size);
+}
+
+.comprar{
+  background-color: var(--cor);
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}

@@ -1,10 +1,11 @@
 import React from 'react'
 import './App.css'
+import Produto from './Components/Produto'
 
 const App = (props) => {
   return (
-    <div className='container'>
-      <p>oi</p>
+    <div>
+      <Produto />
     </div>
   )
 }
