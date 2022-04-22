@@ -1,22 +1,15 @@
 import React from 'react'
-import styled from 'styled-components'
-
-const Titulo = styled.h1`
-  font-size: 2.4rem;
-  color: #43c;
-`
-
-const Paragrafo = styled.p`
-  font-size: 1.4rem;
-  line-height: 1.2;
-  color: tomato;
-`
+import Produto from './Produto'
+import './App.css'
 
 const App = (props) => {
+  
+  const [ativar, setAtivar] = React.useState(false)
+
   return (
     <div>
-      <Titulo>Meu título</Titulo>
-      <Paragrafo>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse nemo cum reprehenderit inventore aspernatur. Numquam, cupiditate! Officia ipsa nulla enim adipisci ex laudantium fugiat vero expedita dignissimos ipsum, quidem eveniet?</Paragrafo>
+      <button onClick={()=>setAtivar(!ativar)}>Ativar</button>
+      {ativar && <Produto />}
     </div>
   )
 }
