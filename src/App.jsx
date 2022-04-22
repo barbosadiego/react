@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import Radio from './Form/Radio';
 
 const perguntas = [
   {
@@ -36,52 +36,55 @@ const perguntas = [
   },
 ];
 
-const App = () => {
-  const [radio, setRadio] = React.useState([]);
-  const [pontos, setPontos] = React.useState(0);
-  const [mensagem, setMensagem] = React.useState('');
+const App = (props) => {
+  const [respostas, setRespostas] = React.useState({
+    p1: '',
+    p2: '',
+    p3: '',
+    p4: '',
+  });
+  const [slide, setSlide] = React.useState(0);
+  const [resultadoFinal, setResultadoFinal] = React.useState(null);
 
-  function handleClick({ target }) {
-    setRadio([...radio, target.value]);
+  function handleChange({ target }) {
+    setRespostas({ ...respostas, [target.id]: target.value });
   }
 
-  function totalPontos() {
-    setMensagem('');
-    setPontos(0);
-    radio.forEach((item, index) => {
-      if (item === perguntas[index].resposta) {
-        setPontos((pontos) => pontos + 1);
-      }
-    });
-    setMensagem('Você acertou ');
+  function resultado() {
+    const corretas = perguntas.filter(
+      ({ id, resposta }) => respostas[id] === resposta,
+    );
+    setResultadoFinal(
+      `Você acertou: ${corretas.length} de ${perguntas.length}`,
+    );
   }
-  // console.log(pontos);
-  // console.log(radio);
-  // console.log(perguntas)
+
+  function handleClick() {
+    if (slide < perguntas.length - 1) {
+      setSlide(slide + 1);
+    } else {
+      setSlide(slide + 1);
+      resultado();
+    }
+  }
+
   return (
-    <>
-      {perguntas.map((item) => (
-        <section key={item.id} className="section">
-          <form>
-            <h2>{item.pergunta}</h2>
-            {item.options.map((opt, index) => (
-              <div key={index} className="input">
-                <input
-                  type="radio"
-                  name="question"
-                  value={opt}
-                  // checked={opt === item.pergunta}
-                  onChange={handleClick}
-                />
-                {opt}
-              </div>
-            ))}
-          </form>
-        </section>
+    <form onSubmit={(e) => e.preventDefault()}>
+      {perguntas.map((pergunta, index) => (
+        <Radio
+          active={slide === index}
+          key={pergunta.id}
+          value={respostas[pergunta.id]}
+          onChange={handleChange}
+          {...pergunta}
+        />
       ))}
-      <button onClick={totalPontos}>Total</button>
-      {mensagem && <p>{mensagem}{pontos}</p>}
-    </>
+      {resultadoFinal ? (
+        <p>{resultadoFinal}</p>
+      ) : (
+        <button onClick={handleClick}>Próxima</button>
+      )}
+    </form>
   );
 };
 
