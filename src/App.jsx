@@ -18,7 +18,7 @@ const App = (props) => {
         <Route path="sobre" element={<Sobre />} />
         <Route path="login" element={<Login />} />
         <Route path="*" element={<NaoEncontrada />} />
-        <Route path="produto/:id" element={<Produto />}></Route>
+        <Route path="produto/:id/*" element={<Produto />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>

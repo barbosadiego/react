@@ -5,7 +5,7 @@ const Login = (props) => {
   const navigate = useNavigate();
 
   function handleClick() {
-    console.log('Fez login');
+    // console.log('Fez login');
     navigate('/sobre')
   }
 

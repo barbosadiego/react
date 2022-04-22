@@ -5,9 +5,9 @@ import './Header.css';
 const Header = (props) => {
   const location = useLocation()
 
-  React.useEffect(()=>{
-    console.log('mudou a rota')
-  }, [location])
+  // React.useEffect(()=>{
+  //   console.log('mudou a rota')
+  // }, [location])
 
   return (
     <nav>
