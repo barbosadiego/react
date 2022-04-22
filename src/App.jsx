@@ -1,28 +1,26 @@
-import React from 'react'
-import Slide from './Slide'
+import React from 'react';
+import foto from './img/foto.jpg';
+import './App.css';
+import DogSvg from './DogSvg';
 
 const App = (props) => {
+  const [olho, setOlho] = React.useState(0);
 
-  const slides = [
-    {
-      id: 'slide1',
-      text: 'Slide 1'
-    },
-    {
-      id: 'slide2',
-      text: 'Slide 2'
-    },
-    {
-      id: 'slide3',
-      text: 'Slide 3'
-    },
-  ]
+  function handleClick(){
+    for(let i = 0; i < 6; i++){
+      setTimeout(()=>{
+        setOlho(i)
+      }, 30 * i)
+    }
+  }
 
   return (
     <div>
-      <Slide slides={slides} />
+      <p className="fundo" onClick={handleClick}></p>
+      <DogSvg color='#444' olho={olho}/>
+      <img src={foto} alt="cachorro" />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
