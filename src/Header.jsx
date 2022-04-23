@@ -4,12 +4,12 @@ import style from './Header.module.css'
 
 const Header = (props) => {
   return (
-    <nav>
+    <nav className={style.nav}>
       <button className={style.btn}>
         <Link to='/'>Produtos</Link>
       </button>
       <button className={style.btn}>
-        <Link to='/contato'>Contato</Link>
+        <Link to='contato'>Contato</Link>
       </button>
     </nav>
   )
